@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clipChildren="false"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <cn.ieclipse.af.view.ViewPagerV4
         android:orientation="vertical"
@@ -16,11 +19,10 @@
     <com.harry.mdapp.common.MainBottomTab
         android:id="@+id/main_bottom_tab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="bottom"
         android:gravity="center_vertical"
         android:layout_below="@id/view_pager"
-        android:paddingTop="10dp"
         android:minHeight="48dp"
         android:orientation="horizontal">
 
@@ -34,8 +36,12 @@
         <cn.ieclipse.af.view.RadioBadgeView
             android:id="@+id/radio_btn_customer"
             style="@style/rb_tab_main"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            android:layout_weight="0.1"
+            android:layout_marginBottom="5dp"
             android:checked="false"
-            android:text="发现"/>
+            android:drawableBottom="@mipmap/person_qunzhushou"/>
 
         <cn.ieclipse.af.view.RadioBadgeView
             android:id="@+id/radio_btn_user"

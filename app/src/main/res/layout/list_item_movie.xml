@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp">
+    android:layout_margin="8dp"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    app:cardBackgroundColor="@color/black_f0f0f0"
+    app:cardCornerRadius="8dp">
 
-<com.facebook.drawee.view.SimpleDraweeView
-    android:id="@+id/iv"
-    android:layout_width="148dp"
-    android:layout_height="100dp"
-    fresco:viewAspectRatio="1.48"/>
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/iv"
+        android:layout_width="148dp"
+        android:layout_height="100dp"
+        fresco:viewAspectRatio="1.48"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="6dp"
+        android:layout_marginLeft="155dp"
+        android:layout_gravity="center_vertical"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:textColor="@color/black_333333"/>
+
         <cn.ieclipse.af.view.FlowLayout
             android:id="@+id/fl"
             android:layout_width="wrap_content"
@@ -32,4 +40,4 @@
             android:numColumns="3">
         </cn.ieclipse.af.view.FlowLayout>
     </LinearLayout>
-</LinearLayout>
+</android.support.v7.widget.CardView>

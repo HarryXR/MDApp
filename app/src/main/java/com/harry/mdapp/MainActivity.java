@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.setFragments(new MovieFragment());
         mViewPager.setDisableWipe(true);
         mViewPager.setAdapter(mAdapter);
+        mViewPager.setOffscreenPageLimit(3);
         mBottomTab.setViewPager(mViewPager);
         PermissionGen.with(this).permissions(Manifest.permission.CALL_PHONE, Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE).request();

@@ -31,9 +31,25 @@ public interface MovieService {
     @POST("in_theaters")
     Observable<BaseResponse<List<MovieResponse>>> getMovie();
 
+    //正在热映
     @GET("in_theaters")
     Observable<BaseResponse<List<MovieResponse>>> getMovie(@Query("start") int start);
-
+    //即将上映
+    @GET("coming_soon")
+    Observable<BaseResponse<List<MovieResponse>>> getMovieComing(@Query("start") int start);
+    //Top250
+    @GET("top250")
+    Observable<BaseResponse<List<MovieResponse>>> getMovieTop(@Query("start") int start);
+    //口碑榜
+    @GET("weekly")
+    Observable<BaseResponse<List<MovieResponse>>> getMovieWeekly(@Query("start") int start);
+    //北美票房榜
+    @GET("us_box")
+    Observable<BaseResponse<List<MovieResponse>>> getMovieUS(@Query("start") int start);
+    //新片榜
+    @GET("new_movies")
+    Observable<BaseResponse<List<MovieResponse>>> getMovieNew(@Query("start") int start);
+    
     @Multipart
     @POST("face")
     Observable<BaseResponse<PostResponse>> upload(@Part("file\"; filename=\"microMsg.1460895294032.jpg\"") RequestBody

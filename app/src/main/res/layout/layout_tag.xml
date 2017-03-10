@@ -9,6 +9,7 @@
     app:af_borderWidth="1px"
     android:radius="8dp"
     android:text="犯罪"
+    android:textColor="@color/black_666666"
     android:focusable="false">
 
 </cn.ieclipse.af.view.RoundButton>

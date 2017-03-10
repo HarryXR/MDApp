@@ -9,13 +9,14 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 
 import com.harry.mdapp.R;
+import com.harry.mdapp.common.CompatActivity;
+import com.harry.mdapp.common.VolleyUtils;
 
-import cn.ieclipse.af.app.AfActivity;
 import cn.ieclipse.af.util.AppUtils;
 import cn.ieclipse.af.util.DialogUtils;
 import cn.ieclipse.af.util.KeyboardUtils;
@@ -26,15 +27,11 @@ import cn.ieclipse.af.volley.RestError;
  *
  * @author Harry
  */
-public abstract class BaseActivity extends AfActivity implements View.OnClickListener {
-    protected TextView mTitleLeftView;
-    protected TextView mTitleTextView;
+public abstract class BaseActivity extends CompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v == mTitleLeftView) { // default back.
-            finish();
-        }
+       
     }
 
     protected void initIntent(Bundle bundle) {
@@ -44,8 +41,6 @@ public abstract class BaseActivity extends AfActivity implements View.OnClickLis
     @Override
     protected void initWindowFeature() {
         super.initWindowFeature();
-        setWindowBackground(android.R.color.white);
-        setImmersiveMode(true);
     }
 
     protected void initContentView(View view) {
@@ -53,19 +48,15 @@ public abstract class BaseActivity extends AfActivity implements View.OnClickLis
     }
 
     protected void initHeaderView() {
-//        mTitleLeftView = (TextView) View.inflate(this, R.layout.title_left_tv, null);
-//        mTitleTextView = (TextView) View.inflate(this, R.layout.title_middle_tv, null);
-
-//        mTitleBar.setLeft(mTitleLeftView);
-//        mTitleBar.setMiddle(mTitleTextView);
-
         int padding = AppUtils.dp2px(this, 8);
-        mTitleBar.setPadding(padding, 0, padding, 0);
+        mToolBar.setPadding(padding, 0, padding, 0);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (!isOverlay()) {
-            mTitleBar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//            mTitleBar.setBottomDrawable(AppUtils.getColor(this, R.color.divider));
+            mToolBar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
+
         }
-//        setOnClickListener(mTitleLeftView);
+
     }
 
     protected void initData() {
@@ -75,21 +66,15 @@ public abstract class BaseActivity extends AfActivity implements View.OnClickLis
     protected void initBottomView() {
 
     }
-
-//    protected ImageView createRightIcon(int icon) {
-//        ImageView iv = (ImageView) View.inflate(this, R.layout.title_right_iv, null);
-//        if (icon > 0) {
-//            iv.setImageResource(icon);
-//        }
-//        return iv;
-//    }
-
-//    protected TextView createRightText(String text) {
-//        TextView tv = (TextView) View.inflate(this, R.layout.title_right_tv, null);
-//        tv.setText(text);
-//        return tv;
-//    }
-
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return super.onTouchEvent(event);
@@ -118,12 +103,12 @@ public abstract class BaseActivity extends AfActivity implements View.OnClickLis
 
     @Override
     public void setTitle(CharSequence title) {
-        mTitleTextView.setText(title);
+        mToolBar.setTitle(title);
     }
 
     @Override
     public void setTitle(int titleId) {
-        mTitleTextView.setText(titleId);
+       mToolBar.setTitle(titleId);
     }
 
     private DialogFragment mLoadingDialog;
@@ -146,7 +131,7 @@ public abstract class BaseActivity extends AfActivity implements View.OnClickLis
 
     public void toastError(RestError error) {
         hideLoadingDialog();
-//        VolleyUtils.toastError(this, error);
+        VolleyUtils.toastError(this, error);
     }
     
     protected static void startActivity(Intent intent, Fragment f, Context context, int requestCode) {

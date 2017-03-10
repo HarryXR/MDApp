@@ -1,28 +1,15 @@
 package com.harry.mdapp.ui.movie;
 
-import android.content.Context;
-import android.net.Uri;
-import android.support.v7.widget.RecyclerView;
+import android.support.design.widget.TabLayout;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.harry.mdapp.R;
-import com.harry.mdapp.common.H5Activity;
-import com.harry.mdapp.ui.base.BaseListFragment;
-import com.harry.rv.controller.MovieController;
-import com.harry.rv.model.MovieResponse;
-import com.harry.rv.retrofit.MovieRequest;
+import com.harry.mdapp.ui.base.BaseFragment;
+import com.harry.mdapp.ui.base.BaseFragmentAdapter;
 
-import java.util.List;
-
-import cn.ieclipse.af.adapter.AfRecyclerAdapter;
-import cn.ieclipse.af.adapter.AfViewHolder;
-import cn.ieclipse.af.adapter.delegate.AdapterDelegate;
-import cn.ieclipse.af.util.AppUtils;
-import cn.ieclipse.af.view.FlowLayout;
-import cn.ieclipse.af.view.RoundButton;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import cn.ieclipse.af.view.ViewPagerV4;
 
 /**
  * 类/接口描述
@@ -31,115 +18,30 @@ import cn.ieclipse.af.view.RoundButton;
  * @date 2017/3/9.
  */
 
-public class MovieFragment extends BaseListFragment<MovieResponse> implements MovieController.LoadListener,
-    AfRecyclerAdapter.OnItemClickListener {
+public class MovieFragment extends BaseFragment {
     
-    private MovieController mController;
+    @BindView(R.id.tab)
+    TabLayout mTab;
+    @BindView(R.id.vp)
+    ViewPagerV4 mVp;
     
-    @Override
-    protected AfRecyclerAdapter<MovieResponse> generateAdapter() {
-        return new AfRecyclerAdapter<>();
-    }
+    private BaseFragmentAdapter mAdapter;
     
     @Override
     protected int getContentLayout() {
-        return super.getContentLayout();
+        return R.layout.fragment_movie;
     }
     
     @Override
     protected void initContentView(View view) {
         super.initContentView(view);
-        mAdapter.registerDelegate(new MovieDelegate(getActivity()));
-        mAdapter.setOnItemClickListener(this);
-        mController = new MovieController(getActivity(), this);
-    }
-    
-    @Override
-    protected void initData() {
-        super.initData();
-        load(false);
-    }
-    
-    @Override
-    protected void load(boolean needCache) {
-        MovieRequest request = new MovieRequest();
-        request.start = (mRefreshHelper.getCurrentPage() - 1)*10;//0开始
-        mController.load(request);
-    }
-    
-    @Override
-    public void onSuccess(List<MovieResponse> out) {
-        mRefreshHelper.onLoadFinish(out);
-    }
-    
-    @Override
-    public void onError(Throwable error) {
+        ButterKnife.bind(this, view);
         
-    }
-    
-    @Override
-    public void onComplete() {
-        
-    }
-    
-    @Override
-    public void onItemClick(AfRecyclerAdapter afRecyclerAdapter, View view, int i) {
-        H5Activity.forward(getActivity(),mAdapter.getItem(i).alt,mAdapter.getItem(i).original_title);
-    }
-    
-    public static class MovieDelegate extends AdapterDelegate<MovieResponse> {
-        
-        Context context;
-        
-        public MovieDelegate(Context context) {
-            this.context = context;
-        }
-        
-        @Override
-        public int getLayout() {
-            return R.layout.list_item_movie;
-        }
-        
-        @Override
-        public void onUpdateView(RecyclerView.ViewHolder viewHolder, MovieResponse movieResponse, int i) {
-            MyViewHolder holder = (MyViewHolder) viewHolder;
-            holder.fl.removeAllViews();
-            holder.iv.setImageURI(Uri.parse(movieResponse.images.large));
-            holder.title.setText(movieResponse.title);
-            for (String genre : movieResponse.genres) {
-                RoundButton tag = null;
-                if (tag == null) {
-                    tag = (RoundButton) View.inflate(context, R.layout.layout_tag, null);
-                }
-                else {
-                    tag = (RoundButton) holder.fl.getTag();
-                }
-                ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(AppUtils.dp2px(context, 47),
-                    AppUtils.dp2px(context, 23));
-                tag.setLayoutParams(params);
-                holder.fl.setTag(tag);
-                tag.setText(genre);
-                holder.fl.addView(tag);
-            }
-        }
-        
-        @Override
-        public Class<? extends RecyclerView.ViewHolder> getViewHolderClass() {
-            return MyViewHolder.class;
-        }
-    }
-    
-    private static class MyViewHolder extends AfViewHolder {
-        
-        SimpleDraweeView iv;
-        TextView title;
-        FlowLayout fl;
-        
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            iv = (SimpleDraweeView) itemView.findViewById(R.id.iv);
-            title = (TextView) itemView.findViewById(R.id.tv_title);
-            fl = (FlowLayout) itemView.findViewById(R.id.fl);
-        }
+        mAdapter = new BaseFragmentAdapter(getFragmentManager());
+        mAdapter.setFragments(new MovieTopFragment(), new MovieComingFragment(), new MovieHotFragment());
+        mVp.setDisableWipe(true);
+        mVp.setAdapter(mAdapter);
+        mVp.setOffscreenPageLimit(4);
+        mTab.setupWithViewPager(mVp);
     }
 }

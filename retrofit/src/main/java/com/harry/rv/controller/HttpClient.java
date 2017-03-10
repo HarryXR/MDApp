@@ -40,7 +40,7 @@ public class HttpClient<L> {
         this.context = context;
         cache = new Cache(context.getExternalCacheDir(), 10 * 1024 * 1024);//10M
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectTimeout(5, TimeUnit.SECONDS);
+        builder.connectTimeout(10, TimeUnit.SECONDS);
         builder.addInterceptor(new BaseInterceptor()).addNetworkInterceptor(new NetworkInterceptor()).cache(cache);
         OkHttpClient client = builder.build();
         retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(client).addConverterFactory(
