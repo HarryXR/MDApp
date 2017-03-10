@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.ieclipse.af.view.RoundButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="35dp"
+    android:layout_height="17dp"
+    android:background="@null"
+    app:af_borderColor="@color/colorPrimary"
+    app:af_borderWidth="1px"
+    android:radius="8dp"
+    android:text="犯罪"
+    android:focusable="false">
+
+</cn.ieclipse.af.view.RoundButton>

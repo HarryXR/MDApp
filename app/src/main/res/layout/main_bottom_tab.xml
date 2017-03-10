@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.harry.mdapp.common.MainBottomTab
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:gravity="center_vertical"
+    android:paddingTop="10dp"
+    android:minHeight="48dp"
+    android:orientation="horizontal">
+
+    <cn.ieclipse.af.view.RadioBadgeView
+        android:id="@+id/radio_btn_home"
+        style="@style/rb_tab_main"
+        android:checked="true"
+        android:text="电影"
+        />
+
+    <cn.ieclipse.af.view.RadioBadgeView
+        android:id="@+id/radio_btn_customer"
+        style="@style/rb_tab_main"
+        android:checked="false"
+        android:text="发现"/>
+
+    <cn.ieclipse.af.view.RadioBadgeView
+        android:id="@+id/radio_btn_user"
+        style="@style/rb_tab_main"
+        android:text="文学"/>
+</com.harry.mdapp.common.MainBottomTab>
