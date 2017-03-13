@@ -36,7 +36,7 @@ public class MyGsonResponseBodyConverter<T> implements Converter<ResponseBody,T>
     public T convert(ResponseBody value) throws IOException {
         String response = value.string();
         BaseResponse re = mGson.fromJson(response, BaseResponse.class);
-        //关注的重点，自定义响应码中非0的情况，一律抛出ApiException异常。
+        //关注的重点，自定义响应码中非0的情况，一律抛出ServerException异常。
         //这样，我们就成功的将该异常交给onError()去处理了。
         if (re.code > 0) {
             value.close();
