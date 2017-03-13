@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.harry.mdapp.common.MainBottomTab;
 import com.harry.mdapp.ui.base.BaseFragmentAdapter;
+import com.harry.mdapp.ui.event.EventFragment;
 import com.harry.mdapp.ui.movie.MovieFragment;
 
 import butterknife.BindView;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         
         mAdapter = new BaseFragmentAdapter(getFragmentManager());
-        mAdapter.setFragments(new MovieFragment());
+        mAdapter.setFragments(new MovieFragment(),new EventFragment());
         mViewPager.setDisableWipe(true);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOffscreenPageLimit(3);

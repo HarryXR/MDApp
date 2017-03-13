@@ -5,6 +5,7 @@ package com.harry.rv.controller;
 
 import android.content.Context;
 
+import com.harry.rv.common.RestError;
 import com.harry.rv.model.BaseResponse;
 
 import java.io.File;
@@ -35,12 +36,12 @@ public class AppUploadController<L> extends HttpClient<L> {
         }
 
         @Override
-        public void onSuccess(T out) {
-            onUploadSuccess(input, out);
+        public void onSuccess(BaseResponse<T> out) {
+            onUploadSuccess(input, out.subjects);
         }
 
         @Override
-        public void onErrors(Throwable error) {
+        public void onErrors(RestError error) {
             onUploadFailure(input, error);
         }
 
@@ -58,7 +59,7 @@ public class AppUploadController<L> extends HttpClient<L> {
 
         protected abstract void upload();
 
-        protected abstract void onUploadFailure(File file, Throwable error);
+        protected abstract void onUploadFailure(File file, RestError error);
 
         protected abstract void onUploadSuccess(File file, T out);
     }

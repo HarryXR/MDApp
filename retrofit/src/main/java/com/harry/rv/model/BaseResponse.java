@@ -14,15 +14,17 @@ public class BaseResponse<T> implements Serializable {
     public int count;
     public int start;
     public int total;
+    public int code;
+    /**
+     * 错误消息
+     */
+    public String msg;
 
     /**
      * 数据
      */
     public T subjects;
+    public T events;
     private int status;
-
-    /**
-     * 消息
-     */
-    private String message;
+    
 }

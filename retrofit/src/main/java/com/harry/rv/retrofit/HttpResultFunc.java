@@ -13,9 +13,9 @@ import rx.functions.Func1;
  * @author Harry
  * @date 2016/9/19.
  */
-public class HttpResultFunc<T> implements Func1<BaseResponse<T>,T> {
+public class HttpResultFunc<T> implements Func1<BaseResponse<T>,BaseResponse<T>> {
     @Override
-    public T call(BaseResponse<T> tBaseResponse) {
-        return tBaseResponse.subjects;
+    public BaseResponse<T> call(BaseResponse<T> tBaseResponse) {
+        return tBaseResponse;
     }
 }

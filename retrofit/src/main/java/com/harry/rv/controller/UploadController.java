@@ -5,6 +5,7 @@ package com.harry.rv.controller;
 
 import android.content.Context;
 
+import com.harry.rv.common.RestError;
 import com.harry.rv.model.BaseRequest;
 import com.harry.rv.model.BaseResponse;
 import com.harry.rv.model.PostResponse;
@@ -50,7 +51,7 @@ public class UploadController extends AppUploadController<UploadController.LoadL
         }
 
         @Override
-        protected void onUploadFailure(File file, Throwable error) {
+        protected void onUploadFailure(File file, RestError error) {
             listener.onError(error);
         }
 
@@ -72,7 +73,7 @@ public class UploadController extends AppUploadController<UploadController.LoadL
     public interface LoadListener {
         void onSuccess(PostResponse out);
 
-        void onError(Throwable error);
+        void onError(RestError error);
 
         void onComplete();
     }

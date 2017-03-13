@@ -11,7 +11,9 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.harry.mdapp.R;
 import com.harry.mdapp.common.H5Activity;
 import com.harry.mdapp.ui.base.BaseListFragment;
+import com.harry.rv.common.RestError;
 import com.harry.rv.controller.MovieController;
+import com.harry.rv.model.BaseResponse;
 import com.harry.rv.model.MovieResponse;
 import com.harry.rv.retrofit.MovieRequest;
 
@@ -74,12 +76,12 @@ public class MovieComingFragment extends BaseListFragment<MovieResponse> impleme
     }
     
     @Override
-    public void onSuccess(List<MovieResponse> out) {
-        mRefreshHelper.onLoadFinish(out);
+    public void onSuccess(BaseResponse<List<MovieResponse>> out) {
+        mRefreshHelper.onLoadFinish(out.subjects);
     }
     
     @Override
-    public void onError(Throwable error) {
+    public void onError(RestError error) {
         
     }
     

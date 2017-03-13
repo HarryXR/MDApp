@@ -16,4 +16,26 @@
     <color name="white">@android:color/white</color>
 
     <color name="green_66C022">#66C022</color>
+    <color name="red_ff3200">#ff3200</color>
+    <color name="linea_divider">#ececec</color>
+    <color name="gray_e5e5e5">#e5e5e5</color>
+    <color name="gray_eeeeee">#eeeeee</color>
+    <color name="green_02deaa">#02deaa</color>
+    <color name="blue_04d9f2">#04d9f2</color>
+    <color name="yellow_fdce14">#fdce14</color>
+    <color name="yellow_ffb527">#ffb527</color>
+    <color name="purple_9583fe">#9583fe</color>
+    <color name="pink_ff557d">#ff557d</color>
+
+    <color name="gray_c8c7cd">#c8c7cd</color>
+    <color name="gray_f6f6f6">#F6F6F6</color>
+
+    <color name="green_ecfffb">#ecfffb</color>
+    <color name="green_01b194">#01b194</color>
+    <color name="green_69C119">#69C119</color>
+    <color name="green_6ac31b">#6ac31b</color>
+    <color name="green_e0f0d5">#e0f0d5</color>
+
+    <color name="black_d7d7d7">#d7d7d7</color>
+    <color name="pink_fbe6e7">#FBE6E7</color>
 </resources>

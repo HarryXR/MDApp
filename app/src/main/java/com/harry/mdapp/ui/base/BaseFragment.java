@@ -9,13 +9,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.harry.mdapp.R;
-import com.harry.mdapp.common.VolleyUtils;
+import com.harry.rv.common.RestError;
+import com.harry.rv.util.ErrorUtils;
 
 import cn.ieclipse.af.app.AfFragment;
 import cn.ieclipse.af.util.AppUtils;
 import cn.ieclipse.af.util.DialogUtils;
 import cn.ieclipse.af.util.KeyboardUtils;
-import cn.ieclipse.af.volley.RestError;
 
 /**
  * 类/接口描述
@@ -92,7 +92,7 @@ public abstract class BaseFragment extends AfFragment implements View.OnClickLis
 
     public void toastError(RestError error){
         hideLoadingDialog();
-        VolleyUtils.toastError(getActivity(), error);
+        ErrorUtils.toastError(getActivity(), error);
     }
 
     protected CharSequence getTitle(){

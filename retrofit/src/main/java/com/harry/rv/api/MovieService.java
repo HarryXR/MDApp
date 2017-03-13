@@ -4,6 +4,7 @@
 package com.harry.rv.api;
 
 import com.harry.rv.model.BaseResponse;
+import com.harry.rv.model.EventResponse;
 import com.harry.rv.model.MovieResponse;
 import com.harry.rv.model.PostResponse;
 
@@ -28,26 +29,26 @@ import rx.Observable;
  * @author Harry
  */
 public interface MovieService {
-    @POST("in_theaters")
+    @POST("movie/in_theaters")
     Observable<BaseResponse<List<MovieResponse>>> getMovie();
 
     //正在热映
-    @GET("in_theaters")
+    @GET("movie/in_theaters")
     Observable<BaseResponse<List<MovieResponse>>> getMovie(@Query("start") int start);
     //即将上映
-    @GET("coming_soon")
+    @GET("movie/coming_soon")
     Observable<BaseResponse<List<MovieResponse>>> getMovieComing(@Query("start") int start);
     //Top250
-    @GET("top250")
+    @GET("movie/top250")
     Observable<BaseResponse<List<MovieResponse>>> getMovieTop(@Query("start") int start);
     //口碑榜
-    @GET("weekly")
+    @GET("movie/weekly")
     Observable<BaseResponse<List<MovieResponse>>> getMovieWeekly(@Query("start") int start);
     //北美票房榜
-    @GET("us_box")
+    @GET("movie/us_box")
     Observable<BaseResponse<List<MovieResponse>>> getMovieUS(@Query("start") int start);
     //新片榜
-    @GET("new_movies")
+    @GET("movie/new_movies")
     Observable<BaseResponse<List<MovieResponse>>> getMovieNew(@Query("start") int start);
     
     @Multipart
@@ -65,4 +66,10 @@ public interface MovieService {
     @Streaming
     @GET()
     Observable<ResponseBody> download(@Url String url);
+    
+    //同城 event
+    @GET("event/list")
+    Observable<BaseResponse<List<EventResponse>>> getEventList(@Query("loc") String cityId,@Query("day_type") String
+        dayType,@Query("type") String
+        type);
 }

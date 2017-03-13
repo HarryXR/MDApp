@@ -15,12 +15,11 @@ import android.view.View;
 
 import com.harry.mdapp.R;
 import com.harry.mdapp.common.CompatActivity;
-import com.harry.mdapp.common.VolleyUtils;
+import com.harry.rv.util.ErrorUtils;
 
 import cn.ieclipse.af.util.AppUtils;
 import cn.ieclipse.af.util.DialogUtils;
 import cn.ieclipse.af.util.KeyboardUtils;
-import cn.ieclipse.af.volley.RestError;
 
 /**
  * 类/接口描述
@@ -129,9 +128,9 @@ public abstract class BaseActivity extends CompatActivity implements View.OnClic
         }
     }
 
-    public void toastError(RestError error) {
+    public void toastError(com.harry.rv.common.RestError error) {
         hideLoadingDialog();
-        VolleyUtils.toastError(this, error);
+        ErrorUtils.toastError(this, error);
     }
     
     protected static void startActivity(Intent intent, Fragment f, Context context, int requestCode) {

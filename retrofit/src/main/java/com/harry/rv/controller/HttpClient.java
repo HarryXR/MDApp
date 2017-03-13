@@ -6,6 +6,8 @@ package com.harry.rv.controller;
 import android.content.Context;
 
 import com.harry.rv.api.MovieService;
+import com.harry.rv.common.RestError;
+import com.harry.rv.gson.MyGsonConverterFactory;
 import com.harry.rv.model.BaseResponse;
 import com.harry.rv.retrofit.BaseInterceptor;
 import com.harry.rv.retrofit.HttpResultFunc;
@@ -17,7 +19,6 @@ import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -29,7 +30,8 @@ import rx.schedulers.Schedulers;
  * @author Harry
  */
 public class HttpClient<L> {
-    public static final String BASE_URL = "https://api.douban.com/v2/movie/";//http://api-test.mainaer.com/v3.0/
+    //https://api.douban.com/v2/event/list?loc=108288&day_type=week&type=all
+    public static final String BASE_URL = "https://api.douban.com/v2/";//http://api-test.mainaer.com/v3.0/
     Retrofit retrofit;
     MovieService service;
     Cache cache;
@@ -44,7 +46,7 @@ public class HttpClient<L> {
         builder.addInterceptor(new BaseInterceptor()).addNetworkInterceptor(new NetworkInterceptor()).cache(cache);
         OkHttpClient client = builder.build();
         retrofit = new Retrofit.Builder().baseUrl(BASE_URL).client(client).addConverterFactory(
-            GsonConverterFactory.create()).addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
+            MyGsonConverterFactory.create()).addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
         service = retrofit.create(MovieService.class);
     }
 
@@ -65,8 +67,10 @@ public class HttpClient<L> {
         protected void load(Input input) {
             this.input = input;
             observable = getObservable();
-            observable.map(new HttpResultFunc<T>()).subscribeOn(Schedulers.io()).observeOn(
-                AndroidSchedulers.mainThread()).subscribe(new Subscriber<T>() {
+            observable.map(new HttpResultFunc<T>()).subscribeOn
+                (Schedulers.io())
+                .observeOn(
+                AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseResponse<T>>() {
                 @Override
                 public void onCompleted() {
                     onComplete();
@@ -74,11 +78,11 @@ public class HttpClient<L> {
 
                 @Override
                 public void onError(Throwable e) {
-                    onErrors(e);
+                    onErrors(new RestError(e));
                 }
 
                 @Override
-                public void onNext(T res) {
+                public void onNext(BaseResponse<T> res) {
                     onSuccess(res);
                 }
             });
@@ -86,9 +90,9 @@ public class HttpClient<L> {
 
         protected abstract Observable<BaseResponse<T>> getObservable();
 
-        public abstract void onSuccess(T out);
+        public abstract void onSuccess(BaseResponse<T> out);
 
-        public abstract void onErrors(Throwable error);
+        public abstract void onErrors(RestError error);
 
         public abstract void onComplete();
     }

@@ -5,6 +5,7 @@ package com.harry.rv.controller;
 
 import android.content.Context;
 
+import com.harry.rv.common.RestError;
 import com.harry.rv.model.BaseResponse;
 import com.harry.rv.model.MovieResponse;
 import com.harry.rv.retrofit.MovieRequest;
@@ -59,12 +60,12 @@ public class MovieController extends HttpClient<MovieController.LoadListener> {
         }
 
         @Override
-        public void onSuccess(List<MovieResponse> out) {
+        public void onSuccess(BaseResponse<List<MovieResponse>> out) {
             listener.onSuccess(out);
         }
 
         @Override
-        public void onErrors(Throwable error) {
+        public void onErrors(RestError error) {
             listener.onError(error);
         }
 
@@ -82,12 +83,12 @@ public class MovieController extends HttpClient<MovieController.LoadListener> {
         }
         
         @Override
-        public void onSuccess(List<MovieResponse> out) {
+        public void onSuccess(BaseResponse<List<MovieResponse>> out) {
             listener.onSuccess(out);
         }
         
         @Override
-        public void onErrors(Throwable error) {
+        public void onErrors(RestError error) {
             listener.onError(error);
         }
         
@@ -104,12 +105,12 @@ public class MovieController extends HttpClient<MovieController.LoadListener> {
         }
         
         @Override
-        public void onSuccess(List<MovieResponse> out) {
+        public void onSuccess(BaseResponse<List<MovieResponse>> out) {
             listener.onSuccess(out);
         }
         
         @Override
-        public void onErrors(Throwable error) {
+        public void onErrors(RestError error) {
             listener.onError(error);
         }
         
@@ -126,12 +127,12 @@ public class MovieController extends HttpClient<MovieController.LoadListener> {
         }
         
         @Override
-        public void onSuccess(List<MovieResponse> out) {
+        public void onSuccess(BaseResponse<List<MovieResponse>> out) {
             listener.onSuccess(out);
         }
         
         @Override
-        public void onErrors(Throwable error) {
+        public void onErrors(RestError error) {
             listener.onError(error);
         }
         
@@ -148,12 +149,12 @@ public class MovieController extends HttpClient<MovieController.LoadListener> {
         }
         
         @Override
-        public void onSuccess(List<MovieResponse> out) {
+        public void onSuccess(BaseResponse<List<MovieResponse>> out) {
             listener.onSuccess(out);
         }
         
         @Override
-        public void onErrors(Throwable error) {
+        public void onErrors(RestError error) {
             listener.onError(error);
         }
         
@@ -170,12 +171,12 @@ public class MovieController extends HttpClient<MovieController.LoadListener> {
         }
         
         @Override
-        public void onSuccess(List<MovieResponse> out) {
+        public void onSuccess(BaseResponse<List<MovieResponse>> out) {
             listener.onSuccess(out);
         }
         
         @Override
-        public void onErrors(Throwable error) {
+        public void onErrors(RestError error) {
             listener.onError(error);
         }
         
@@ -186,9 +187,9 @@ public class MovieController extends HttpClient<MovieController.LoadListener> {
     }
 
     public interface LoadListener {
-        void onSuccess(List<MovieResponse> out);
+        void onSuccess(BaseResponse<List<MovieResponse>> out);
 
-        void onError(Throwable error);
+        void onError(RestError error);
 
         void onComplete();
     }

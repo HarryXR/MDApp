@@ -46,7 +46,7 @@
         <cn.ieclipse.af.view.RadioBadgeView
             android:id="@+id/radio_btn_user"
             style="@style/rb_tab_main"
-            android:text="文学"/>
+            android:text="同城"/>
     </com.harry.mdapp.common.MainBottomTab>
 
 </LinearLayout>

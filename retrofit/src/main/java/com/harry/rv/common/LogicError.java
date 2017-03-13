@@ -1,6 +1,6 @@
-package com.harry.mdapp.common;
+package com.harry.rv.common;
 
-import com.harry.mdapp.model.BaseResponse;
+import com.harry.rv.model.BaseResponse;
 
 public class LogicError extends Exception {
     private static final long serialVersionUID = 7739186324576518504L;

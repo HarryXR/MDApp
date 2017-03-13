@@ -1,40 +1,25 @@
-/*
- * Copyright 2014-2015 ieclipse.cn.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package com.harry.mdapp.common;
+package com.harry.rv.util;
 
 import android.content.Context;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.harry.mdapp.R;
-
-import cn.ieclipse.af.volley.RestError;
+import com.harry.rv.R;
+import com.harry.rv.common.LogicError;
+import com.harry.rv.common.RestError;
 
 /**
- * Volley Utils
- * 
- * @author Jamling
- *       
+ * 类/接口描述
+ *
+ * @author Harry
+ * @date 2017/3/13.
  */
-public final class VolleyUtils {
-    
+
+public class ErrorUtils {
     /**
      * private constructor
      */
-    private VolleyUtils() {
+    private ErrorUtils() {
     }
     
     public static void toastError(Context context, RestError error) {
@@ -52,8 +37,8 @@ public final class VolleyUtils {
         }
         int type = error.getType();
         int resId;
-        if (type == RestError.TYPE_AUTH) {
-            resId = R.string.error_type_auth;
+        if (type == RestError.TYPE_HTTP) {
+            resId = R.string.error_type_request;
         }
         else if (type == RestError.TYPE_NO_CONNECTION) {
             resId = R.string.error_type_no_network;
