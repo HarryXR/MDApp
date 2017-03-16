@@ -1,5 +1,6 @@
 package com.harry.mdapp.common;
 
+import android.annotation.TargetApi;
 import android.app.DialogFragment;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
@@ -32,6 +35,7 @@ public abstract class CompatActivity extends AppCompatActivity {
     private LayoutInflater mLayoutInflater;
     private FrameLayout mContentView;
     protected FrameLayout mBottomBar;
+    private SystemBarTintManager mTintManager;
     private boolean skipCreate = false;
     
     @Override
@@ -154,13 +158,55 @@ public abstract class CompatActivity extends AppCompatActivity {
     }
     
     protected void initWindowFeature() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+    }
+    
+    public void setImmersiveMode(boolean immersiveMode) {
+        if (mRootView != null) {
+            throw new IllegalStateException("Can't set immersive mode after the content view has been set, if you need immersive mode, please call it in initWindowFeature()");
+        }
+        setTranslucentStatus(immersiveMode);
+    }
+    
+    @TargetApi(19)
+    private void setTranslucentStatus(boolean immersiveMode) {
+        WindowManager.LayoutParams winParams = getWindow().getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        boolean oldOn = (winParams.flags | bits) == winParams.flags;
+        if (immersiveMode == oldOn) {
+            return;
+        }
+        if (immersiveMode) {
+            winParams.flags |= bits;
+        }
+        else {
+            winParams.flags &= ~bits;
+        }
+        getWindow().setAttributes(winParams);
+        if (mRootView != null) {
+//            mRootView.setFitsSystemWindows(immersiveMode);
+        }
     }
     
     protected void initInitData() {
     }
     
     protected void initStatusBar() {
+        mTintManager = new SystemBarTintManager(this);
+        mTintManager.setStatusBarTintEnabled(true);
+        mTintManager.setStatusBarTintColor(getStatusBarColor());
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            getWindow().setStatusBarColor(getStatusBarColor());
+//        }else{
+//
+//        }
     }
+    
+    protected int getStatusBarColor(){
+        return getResources().getColor(R.color.colorPrimaryDark);
+    }
+    
+    
     
     protected void initIntent(Bundle bundle) {
         

@@ -68,11 +68,30 @@ public class EventDetailActivity extends BaseActivity {
             iv.setImageURI(Uri.parse(mData.image_hlarge));
             mContent.setText(Html.fromHtml(mData.content));
         }
+        
     }
     
-    private void setTitle(String title){
-        getSupportActionBar().setTitle(title);
+    @Override
+    protected void initWindowFeature() {
+        super.initWindowFeature();
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            View decorView = getWindow().getDecorView();
+//            int option = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+//            decorView.setSystemUiVisibility(option);
+//            getWindow().setNavigationBarColor(Color.TRANSPARENT);
+//            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        
+//        }
+        setImmersiveMode(true);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
     }
+    
+//    @Override
+//    protected int getStatusBarColor() {
+//        return getResources().getColor(R.color.colorPrimaryDark);
+//    }
     
     @Override
     protected void initIntent(Bundle bundle) {
