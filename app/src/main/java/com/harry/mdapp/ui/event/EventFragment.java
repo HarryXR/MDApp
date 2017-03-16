@@ -48,6 +48,7 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
         });
         mHeadDecoration = new StickyRecyclerHeadersDecoration(adapter);
         mListView.addItemDecoration(mHeadDecoration);
+        adapter.setOnItemClickListener(this);
         return adapter;
     }
     
@@ -80,7 +81,7 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
     
     @Override
     public void onItemClick(AfRecyclerAdapter afRecyclerAdapter, View view, int i) {
-        
+        EventDetailActivity.go(getActivity(), (EventResponse) afRecyclerAdapter.getItem(i));
     }
     
     @Override
@@ -91,7 +92,7 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
                 if (response.category != null) {
                     String a = response.category;
                     if (a.length() > 1) {
-                        a=a.substring(0,1);
+                        a = a.substring(0, 1);
                         response.setInitial(a);
                     }
                 }
@@ -146,7 +147,6 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
             String showValue = String.valueOf(getItem(position).category);
             textView.setText(showValue);
         }
-     
     }
     
     @Override

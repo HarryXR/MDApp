@@ -20,6 +20,8 @@ public class EventResponse implements Serializable,Comparable<EventResponse>{
     public String image;
     public String image_hlarge;
     public String time_str;
+    public String address;
+    public String content;
     
     public String initial=" ";
     

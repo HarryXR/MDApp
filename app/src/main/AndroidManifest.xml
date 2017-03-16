@@ -27,9 +27,15 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".common.H5Activity"
-                  android:configChanges="keyboardHidden|orientation"
-                  android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.event.EventDetailActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".common.H5Activity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
