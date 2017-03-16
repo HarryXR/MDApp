@@ -1,5 +1,7 @@
 package com.harry.rv.gson;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonWriter;
@@ -35,6 +37,7 @@ public class MyGsonRequestBodyConverter <T> implements Converter<T, RequestBody>
     
     @Override
     public RequestBody convert(T value) throws IOException {
+        Log.e(getClass().getSimpleName(),value.toString());
         Buffer buffer = new Buffer();
         Writer writer = new OutputStreamWriter(buffer.outputStream(), UTF_8);
         JsonWriter jsonWriter = gson.newJsonWriter(writer);

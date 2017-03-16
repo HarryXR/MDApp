@@ -1,14 +1,18 @@
 package com.harry.mdapp.common;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.harry.mdapp.R;
 import com.harry.mdapp.ui.base.BaseActivity;
@@ -25,9 +29,20 @@ public class H5Activity extends BaseActivity {
     public static final String EXTRA_TITLE = "title";
     
     private WebView mWebView;
+    private ProgressBar mPb;
     
     private String mUrl = "";
     private String mTitle;
+    
+//    private Handler mPbHandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            if (mPb.getProgress() < 85) {
+//                mPb.setProgress(mPb.getProgress() + 1);
+//                mPbHandler.sendEmptyMessageDelayed(0, 100);
+//            }
+//        }
+//    };
     
     @Override
     protected int getContentLayout() {
@@ -43,6 +58,7 @@ public class H5Activity extends BaseActivity {
     protected void initContentView(View view) {
         super.initContentView(view);
         mWebView = (WebView) view.findViewById(R.id.wv_h5);
+        mPb = (ProgressBar) view.findViewById(R.id.pb);
     }
     
     @Override
@@ -122,12 +138,31 @@ public class H5Activity extends BaseActivity {
             super.onReceivedTitle(webView, s);
             onUpdateTitle(webView, s);
         }
+        
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            super.onProgressChanged(view, newProgress);
+            mPb.setProgress(newProgress);
+            if (newProgress >= 100) {
+                mPb.setVisibility(View.GONE);
+            }
+            else {
+                mPb.setVisibility(View.VISIBLE);
+            }
+        }
     }
     
     private class H5WebViewClient extends WebViewClient {
+        
         @Override
         public boolean shouldOverrideUrlLoading(WebView webView, String s) {
             return H5Activity.this.shouldOverrideUrlLoading(webView, s);
+        }
+        
+        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            return H5Activity.this.shouldOverrideUrlLoading(view, request.getUrl().toString());
         }
     }
 }

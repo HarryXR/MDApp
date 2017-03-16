@@ -18,6 +18,7 @@ import com.harry.rv.model.EventResponse;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 
+import java.util.Collections;
 import java.util.List;
 
 import cn.ieclipse.af.adapter.AfRecyclerAdapter;
@@ -59,7 +60,6 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
     protected void initContentView(View view) {
         super.initContentView(view);
         mRefreshHelper.setDividerColor(getResources().getColor(R.color.white));
-        mRefreshHelper.setPageSize(20);
         mController = new EventListController(getActivity().getApplicationContext(), this);
     }
     
@@ -72,7 +72,7 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
     @Override
     protected void load(boolean needCache) {
         EventRequest request = new EventRequest();
-        request.loc = "108288";
+        request.loc = "108289";
         request.dayType = "week";
         request.type = "all";
         mController.load(request);
@@ -85,12 +85,28 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
     
     @Override
     public void onSuccess(BaseResponse<List<EventResponse>> out) {
-        mRefreshHelper.onLoadFinish(out.events);
+        List<EventResponse> res = out.events;
+        if (res != null && res.size() > 0) {
+            for (EventResponse response : res) {
+                if (response.category != null) {
+                    String a = response.category;
+                    if (a.length() > 1) {
+                        a=a.substring(0,1);
+                        response.setInitial(a);
+                    }
+                }
+                else {
+                    response.setInitial(" ");
+                }
+            }
+            Collections.sort(res);
+            mRefreshHelper.onLoadFinish(res);
+        }
     }
     
     @Override
     public void onError(RestError e) {
-        mRefreshLayout.onRefreshComplete();
+        mRefreshHelper.onLoadFailure(null);
         toastError(e);
     }
     
@@ -120,27 +136,17 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
         @Override
         public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_list_head, parent, false);
-            //view.setBackgroundResource(R.color.black_cccccc);
+            
             return new AfViewHolder(view);
         }
         
         @Override
         public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
             TextView textView = (TextView) holder.itemView.findViewById(android.R.id.text1);
-            String showValue = String.valueOf(getItem(position).subcategory_name);
+            String showValue = String.valueOf(getItem(position).category);
             textView.setText(showValue);
         }
-        
-        public int getPositionForSection(char section) {
-            for (int i = 0; i < getItemCount(); i++) {
-                String sortStr = getDataList().get(i).category;
-                char firstChar = sortStr.toUpperCase().charAt(0);
-                if (firstChar == section) {
-                    return i;
-                }
-            }
-            return -1;
-        }
+     
     }
     
     @Override

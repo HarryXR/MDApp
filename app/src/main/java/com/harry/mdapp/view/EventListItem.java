@@ -53,7 +53,7 @@ public class EventListItem extends LinearLayout {
     
     public void setData(EventResponse data){
         title.setText(data.title);
-        iv.setImageURI(Uri.parse(data.image));
+        iv.setImageURI(Uri.parse(data.image_hlarge));
         time.setText(data.time_str);
     }
 }

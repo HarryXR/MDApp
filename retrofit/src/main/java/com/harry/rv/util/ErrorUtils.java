@@ -50,7 +50,8 @@ public class ErrorUtils {
             resId = R.string.error_type_no_network;
         }
         else if (type == RestError.TYPE_SERVER) {
-            resId = R.string.error_type_server;
+//            resId = R.string.error_type_server;
+            return error.getMessage();
         }
         else if (type == RestError.TYPE_PARSE) {
             resId = R.string.error_type_parse;

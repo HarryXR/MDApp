@@ -10,10 +10,15 @@ package com.harry.rv.common;
 public class ServerException extends RuntimeException {
     public int code;
     public String message;
-    public ServerException(int code,String msg){
+    
+    public ServerException(int code, String msg) {
         super();
-        this.code=code;
-        this.message=msg;
+        this.code = code;
+        this.message = msg;
     }
     
+    @Override
+    public String getMessage() {
+        return message;
+    }
 }
