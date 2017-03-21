@@ -73,7 +73,7 @@ public class HttpClient<L> {
                 AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseResponse<T>>() {
                 @Override
                 public void onCompleted() {
-                    onComplete();
+                    
                 }
 
                 @Override
@@ -93,7 +93,5 @@ public class HttpClient<L> {
         public abstract void onSuccess(BaseResponse<T> out);
 
         public abstract void onErrors(RestError error);
-
-        public abstract void onComplete();
     }
 }

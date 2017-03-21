@@ -46,10 +46,6 @@ public class EventListController extends HttpClient<EventListController.LoadList
             listener.onError(error);
         }
         
-        @Override
-        public void onComplete() {
-            
-        }
     }
     
     public interface LoadListener {

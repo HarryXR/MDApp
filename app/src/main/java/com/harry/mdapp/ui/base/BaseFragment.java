@@ -9,10 +9,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.harry.mdapp.R;
+import com.harry.mdapp.common.CompatFragment;
 import com.harry.rv.common.RestError;
 import com.harry.rv.util.ErrorUtils;
 
-import cn.ieclipse.af.app.AfFragment;
 import cn.ieclipse.af.util.AppUtils;
 import cn.ieclipse.af.util.DialogUtils;
 import cn.ieclipse.af.util.KeyboardUtils;
@@ -22,7 +22,7 @@ import cn.ieclipse.af.util.KeyboardUtils;
  *
  * @author harry
  */
-public abstract class BaseFragment extends AfFragment implements View.OnClickListener {
+public abstract class BaseFragment extends CompatFragment implements View.OnClickListener {
 
     protected TextView mTitleLeftView;
     protected TextView mTitleTextView;
@@ -51,18 +51,19 @@ public abstract class BaseFragment extends AfFragment implements View.OnClickLis
     @Override
     protected void initHeaderView() {
         super.initHeaderView();
-//        mTitleLeftView = (TextView) View.inflate(mTitleBar.getContext(), R.layout.title_left_tv, null);
-//        mTitleTextView = (TextView) View.inflate(mTitleBar.getContext(), R.layout.title_middle_tv, null);
+        mTitleLeftView = (TextView) View.inflate(mTitleBar.getContext(), R.layout.title_left_tv, null);
+        mTitleTextView = (TextView) View.inflate(mTitleBar.getContext(), R.layout.title_middle_tv, null);
 
         mTitleBar.setLeft(mTitleLeftView);
         mTitleBar.setMiddle(mTitleTextView);
 
+        
         int padding = AppUtils.dp2px(mTitleBar.getContext(), 8);
         mTitleBar.setPadding(padding, 0, padding, 0);
-        //if(!isOverlay())
+        if(!isOverlay())
         {
             mTitleBar.setBackgroundColor(AppUtils.getColor(mTitleBar.getContext(), R.color.colorPrimary));
-//            mTitleBar.setBottomDrawable(AppUtils.getColor(mTitleBar.getContext(), R.color.divider));
+            mTitleBar.setBottomDrawable(AppUtils.getColor(mTitleBar.getContext(), R.color.divider));
         }
         setOnClickListener(mTitleLeftView);
     }

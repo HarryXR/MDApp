@@ -38,4 +38,8 @@
 
     <color name="black_d7d7d7">#d7d7d7</color>
     <color name="pink_fbe6e7">#FBE6E7</color>
+
+    <color name="fg_title_bar_press">@android:color/darker_gray</color>
+    <color name="divider">@color/black_cccccc</color>
+    <color name="fg_title_bar">@color/white</color>
 </resources>

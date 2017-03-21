@@ -82,13 +82,10 @@ public class MovieTopFragment extends BaseListFragment<MovieResponse> implements
     
     @Override
     public void onError(RestError error) {
-        
+        mRefreshLayout.onRefreshComplete();
+        toastError(error);
     }
     
-    @Override
-    public void onComplete() {
-        
-    }
     
     @Override
     public void onItemClick(AfRecyclerAdapter afRecyclerAdapter, View view, int i) {

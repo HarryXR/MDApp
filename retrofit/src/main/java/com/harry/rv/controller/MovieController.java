@@ -34,19 +34,7 @@ public class MovieController extends HttpClient<MovieController.LoadListener> {
         LoadTopTask task = new LoadTopTask();
         task.load(request);
     }
-    public void loadUS(MovieRequest request) {
-        LoadUSTask task = new LoadUSTask();
-        task.load(request);
-    }
-   
-    public void loadWeekly(MovieRequest request) {
-        LoadWeeklyTask task = new LoadWeeklyTask();
-        task.load(request);
-    }
-    public void loadNew(MovieRequest request) {
-        LoadNewTask task = new LoadNewTask();
-        task.load(request);
-    }
+    
     public void loadHot(MovieRequest request) {
         LoadHotTask task = new LoadHotTask();
         task.load(request);
@@ -68,11 +56,7 @@ public class MovieController extends HttpClient<MovieController.LoadListener> {
         public void onErrors(RestError error) {
             listener.onError(error);
         }
-
-        @Override
-        public void onComplete() {
-            listener.onComplete();
-        }
+        
     }
     
     private class LoadTopTask extends BaseTask<MovieRequest,List<MovieResponse>> {
@@ -92,33 +76,8 @@ public class MovieController extends HttpClient<MovieController.LoadListener> {
             listener.onError(error);
         }
         
-        @Override
-        public void onComplete() {
-            listener.onComplete();
-        }
     }
-    private class LoadNewTask extends BaseTask<MovieRequest,List<MovieResponse>> {
-        
-        @Override
-        public Observable<BaseResponse<List<MovieResponse>>> getObservable() {
-            return service.getMovieNew(input.start);
-        }
-        
-        @Override
-        public void onSuccess(BaseResponse<List<MovieResponse>> out) {
-            listener.onSuccess(out);
-        }
-        
-        @Override
-        public void onErrors(RestError error) {
-            listener.onError(error);
-        }
-        
-        @Override
-        public void onComplete() {
-            listener.onComplete();
-        }
-    }
+    
     private class LoadHotTask extends BaseTask<MovieRequest,List<MovieResponse>> {
         
         @Override
@@ -136,61 +95,12 @@ public class MovieController extends HttpClient<MovieController.LoadListener> {
             listener.onError(error);
         }
         
-        @Override
-        public void onComplete() {
-            listener.onComplete();
-        }
     }
-    private class LoadUSTask extends BaseTask<MovieRequest,List<MovieResponse>> {
-        
-        @Override
-        public Observable<BaseResponse<List<MovieResponse>>> getObservable() {
-            return service.getMovieUS(input.start);
-        }
-        
-        @Override
-        public void onSuccess(BaseResponse<List<MovieResponse>> out) {
-            listener.onSuccess(out);
-        }
-        
-        @Override
-        public void onErrors(RestError error) {
-            listener.onError(error);
-        }
-        
-        @Override
-        public void onComplete() {
-            listener.onComplete();
-        }
-    }
-    private class LoadWeeklyTask extends BaseTask<MovieRequest,List<MovieResponse>> {
-        
-        @Override
-        public Observable<BaseResponse<List<MovieResponse>>> getObservable() {
-            return service.getMovieWeekly(input.start);
-        }
-        
-        @Override
-        public void onSuccess(BaseResponse<List<MovieResponse>> out) {
-            listener.onSuccess(out);
-        }
-        
-        @Override
-        public void onErrors(RestError error) {
-            listener.onError(error);
-        }
-        
-        @Override
-        public void onComplete() {
-            listener.onComplete();
-        }
-    }
+    
 
     public interface LoadListener {
         void onSuccess(BaseResponse<List<MovieResponse>> out);
 
         void onError(RestError error);
-
-        void onComplete();
     }
 }

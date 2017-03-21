@@ -7,6 +7,12 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppParentTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
     <!--<style name="AppTheme.AppBarOverlay" parent="android:ThemeOverlay.Material.Dark.ActionBar"/>-->
 
     <!--<style name="AppTheme.PopupOverlay" parent="android:ThemeOverlay.Material.Light"/>-->

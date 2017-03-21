@@ -82,12 +82,7 @@ public class MovieComingFragment extends BaseListFragment<MovieResponse> impleme
     
     @Override
     public void onError(RestError error) {
-        
-    }
-    
-    @Override
-    public void onComplete() {
-        
+        mRefreshLayout.onRefreshComplete();
     }
     
     @Override
@@ -149,5 +144,11 @@ public class MovieComingFragment extends BaseListFragment<MovieResponse> impleme
             title = (TextView) itemView.findViewById(R.id.tv_title);
             fl = (FlowLayout) itemView.findViewById(R.id.fl);
         }
+    }
+    
+    @Override
+    public void onDestroyView() {
+        
+        super.onDestroyView();
     }
 }

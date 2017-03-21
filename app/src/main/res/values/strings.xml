@@ -3,7 +3,8 @@
     <string name="action_settings">Settings</string>
 
     <string name="common_loading">正在加载, 请稍候...</string>
-
+    <string name="common_back">返回</string>
+    <string name="common_share">分享</string>
     <!--error -->
     <string name="error_type_auth">身份验证失败</string>
     <string name="error_type_no_network">网络未连接</string>

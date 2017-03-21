@@ -1,5 +1,6 @@
 package com.harry.mdapp.ui.event;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.text.Html;
+import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
@@ -68,7 +70,14 @@ public class EventDetailActivity extends BaseActivity {
             iv.setImageURI(Uri.parse(mData.image_hlarge));
             mContent.setText(Html.fromHtml(mData.content));
         }
+        mToolBar.getMenu().add("相亲");
         
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_event_detail,menu);
+        return true;
     }
     
     @Override
@@ -110,6 +119,6 @@ public class EventDetailActivity extends BaseActivity {
         Bundle b = new Bundle();
         b.putSerializable(EXTRA_DATA, data);
         intent.putExtras(b);
-        context.startActivity(intent);
+        ((Activity)context).startActivity(intent);
     }
 }
