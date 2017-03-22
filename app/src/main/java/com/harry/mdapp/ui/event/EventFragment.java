@@ -1,11 +1,17 @@
 package com.harry.mdapp.ui.event;
 
 import android.content.Context;
+import android.os.Message;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import com.harry.mdapp.R;
 import com.harry.mdapp.ui.base.BaseListFragment;
@@ -21,6 +27,8 @@ import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 import java.util.Collections;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.ieclipse.af.adapter.AfRecyclerAdapter;
 import cn.ieclipse.af.adapter.AfViewHolder;
 
@@ -34,8 +42,27 @@ import cn.ieclipse.af.adapter.AfViewHolder;
 public class EventFragment extends BaseListFragment<EventResponse> implements AfRecyclerAdapter.OnItemClickListener,
     EventListController.LoadListener {
     
+    @BindView(R.id.ts)
+    TextSwitcher mTs;
     public EventListController mController;
     StickyRecyclerHeadersDecoration mHeadDecoration;
+    
+    private String[] mStrs = {"今天即将有新活动了", "马上就要放假啦", "天气有点冷啊"};
+    private int index = 0;
+    
+    MyHandler handler = new MyHandler();
+    
+    class MyHandler extends android.os.Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            mTs.setText(mStrs[index]);
+            index++;
+            if (index == mStrs.length) {
+                index = 0;
+            }
+        }
+    }
     
     @Override
     protected AfRecyclerAdapter generateAdapter() {
@@ -54,14 +81,35 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
     
     @Override
     protected int getContentLayout() {
-        return super.getContentLayout();
+        return R.layout.fragment_event;
     }
     
     @Override
     protected void initContentView(View view) {
         super.initContentView(view);
+        ButterKnife.bind(this, view);
         mRefreshHelper.setDividerColor(getResources().getColor(R.color.white));
         mController = new EventListController(getActivity().getApplicationContext(), this);
+        addSwitchView();
+    }
+    
+    private void addSwitchView() {
+        mTs.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+                TextView textView = new TextView(EventFragment.this.getActivity().getApplicationContext());
+                textView.setSingleLine();
+                textView.setTextSize(15);
+                textView.setTextColor(getResources().getColor(R.color.black_999999));
+                textView.setEllipsize(TextUtils.TruncateAt.END);
+                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+                lp.gravity = Gravity.CENTER;
+                textView.setLayoutParams(lp);
+                return textView;
+            }
+        });
+        new MyThread().start();
     }
     
     @Override
@@ -146,6 +194,23 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
             TextView textView = (TextView) holder.itemView.findViewById(android.R.id.text1);
             String showValue = String.valueOf(getItem(position).category);
             textView.setText(showValue);
+        }
+    }
+    
+    private class MyThread extends Thread {
+        @Override
+        public void run() {
+            super.run();
+            while (index < mStrs.length) {
+                try {
+                    synchronized (this) {
+                        handler.sendEmptyMessage(0);
+                        this.sleep(2000);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
     

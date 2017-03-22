@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:drawableLeft="@mipmap/title_news"/>
+        <TextSwitcher
+            android:id="@+id/ts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:minHeight="48dp"
+            android:inAnimation="@anim/push_in"
+            android:outAnimation="@anim/push_out">
+
+        </TextSwitcher>
+    </LinearLayout>
+    <cn.ieclipse.af.view.refresh.RefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:ptr_content="@layout/base_rv"
+        app:ptr_empty="@layout/ptr_empty_view">
+
+    </cn.ieclipse.af.view.refresh.RefreshLayout>
+</LinearLayout>
