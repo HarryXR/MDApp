@@ -72,4 +72,8 @@ public interface MovieService {
     Observable<BaseResponse<List<EventResponse>>> getEventList(@Query("loc") String cityId,@Query("day_type") String
         dayType,@Query("type") String
         type);
+    
+    //文学 book
+    @GET("book/1003078")
+    Observable<BaseResponse<EventResponse>> getBook();
 }

@@ -12,7 +12,7 @@ public class ServerException extends RuntimeException {
     public String message;
     
     public ServerException(int code, String msg) {
-        super();
+        super(msg);
         this.code = code;
         this.message = msg;
     }

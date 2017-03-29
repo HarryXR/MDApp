@@ -3,6 +3,7 @@ package com.harry.rv.gson;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
+import com.harry.rv.common.RestError;
 import com.harry.rv.common.ServerException;
 import com.harry.rv.model.BaseResponse;
 
@@ -40,7 +41,11 @@ public class MyGsonResponseBodyConverter<T> implements Converter<ResponseBody,T>
         //这样，我们就成功的将该异常交给onError()去处理了。
         if (re.code > 0) {
             value.close();
-            throw new ServerException(re.code, re.msg);
+            try {
+                throw new RestError(new ServerException(re.code, re.msg));
+            } catch (RestError restError) {
+                restError.printStackTrace();
+            }
         }
         
         MediaType mediaType = value.contentType();

@@ -45,10 +45,6 @@ public class AppUploadController<L> extends HttpClient<L> {
             onUploadFailure(input, error);
         }
 
-        @Override
-        public void onComplete() {
-        }
-
         protected void buildRequest() {
             RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), input);
             builder = new MultipartBody.Builder();

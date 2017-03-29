@@ -1,6 +1,7 @@
 package com.harry.mdapp.ui.event;
 
 import android.content.Context;
+import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -52,7 +53,7 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
     
     MyHandler handler = new MyHandler();
     
-    class MyHandler extends android.os.Handler {
+    class MyHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -149,7 +150,11 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
                 }
             }
             Collections.sort(res);
-            mRefreshHelper.onLoadFinish(res);
+            mAdapter.clear();
+            mAdapter.setDataList(res);
+            mAdapter.notifyDataSetChanged();
+            mRefreshLayout.onRefreshComplete();
+//            mRefreshHelper.onLoadFinish(res);
         }
     }
     
@@ -192,7 +197,7 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
         @Override
         public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
             TextView textView = (TextView) holder.itemView.findViewById(android.R.id.text1);
-            String showValue = String.valueOf(getItem(position).category);
+            String showValue = String.valueOf(getItem(position).subcategory_name==null?"":getItem(position).subcategory_name);
             textView.setText(showValue);
         }
     }

@@ -32,33 +32,33 @@ public class RestError extends Exception {
     
     public RestError(Throwable error) {
         super(error);
-        this.initType();
+        initType();
     }
     
     private void initType() {
         Throwable error = this.getCause();
         if(error != null) {
             if(error instanceof HttpException) {
-                this.mErrorType = TYPE_HTTP;
+               mErrorType = TYPE_HTTP;
             } else if(error instanceof ConnectException) {
-                this.mErrorType = TYPE_NO_CONNECTION;
+                mErrorType = TYPE_NO_CONNECTION;
             } else if(error instanceof TimeoutException) {
-                this.mErrorType = TYPE_TIMEOUT;
+                mErrorType = TYPE_TIMEOUT;
             } else if(error instanceof SocketTimeoutException) {
-                this.mErrorType = TYPE_TIMEOUT;
+                mErrorType = TYPE_TIMEOUT;
             }
             else if(error instanceof NetworkErrorException) {
-                this.mErrorType = TYPE_NETWORK;
+                mErrorType = TYPE_NETWORK;
             } else if(error instanceof ServerException) {
-                this.mErrorType = TYPE_SERVER;
+                mErrorType = TYPE_SERVER;
             } else if(error instanceof JsonParseException
                 || error instanceof JSONException
                 || error instanceof ParseException) {
-                this.mErrorType = TYPE_PARSE;
+                mErrorType = TYPE_PARSE;
             } else if(error instanceof ClientException) {
-                this.mErrorType = TYPE_CLIENT;
+               mErrorType = TYPE_CLIENT;
             } else {
-                this.mErrorType = 0;
+                mErrorType = 0;
             }
             
         }

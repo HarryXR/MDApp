@@ -6,9 +6,7 @@ package com.harry.rv.retrofit;
 import android.text.TextUtils;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
-import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -24,13 +22,13 @@ public class NetworkInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request=chain.request();
         
-        CacheControl.Builder cacheBuilder=new CacheControl.Builder();
-        cacheBuilder.maxAge(10, TimeUnit.SECONDS);
-        CacheControl cache=cacheBuilder.build();
+//        CacheControl.Builder cacheBuilder=new CacheControl.Builder();
+//        cacheBuilder.maxAge(10, TimeUnit.SECONDS);//缓存最大有效期10秒
+//        CacheControl cache=cacheBuilder.build();
         
-        Request rq=request.newBuilder().cacheControl(cache).build();
+//        Request rq=request.newBuilder().cacheControl(cache).build();
         
-        Response originalRes=chain.proceed(rq);
+        Response originalRes=chain.proceed(request);
         String severCache=originalRes.header("Cache-Control");
         
         if(TextUtils.isEmpty(severCache)){

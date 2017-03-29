@@ -3,10 +3,12 @@ package com.harry.mdapp.ui.event;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Menu;
 import android.view.View;
@@ -32,10 +34,10 @@ public class EventDetailActivity extends BaseActivity {
     
     private EventResponse mData;
     
-    @BindView(R.id.tv_title)
-    TextView mTitle;
-    @BindView(R.id.tv_address)
-    TextView mAddress;
+//    @BindView(R.id.tv_title)
+//    TextView mTitle;
+//    @BindView(R.id.tv_address)
+//    TextView mAddress;
     @BindView(R.id.iv)
     SimpleDraweeView iv;
     @BindView(R.id.tv_content)
@@ -44,6 +46,8 @@ public class EventDetailActivity extends BaseActivity {
     AppBarLayout mHeadBarLayout;
     @BindView(R.id.collaps_layout)
     CollapsingToolbarLayout mCollLayout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     @Override
     protected int getContentLayout() {
         return R.layout.activity_event_detail;
@@ -53,20 +57,25 @@ public class EventDetailActivity extends BaseActivity {
     protected void initContentView(View view) {
         super.initContentView(view);
         ButterKnife.bind(this);
-        setTitle("活动详情");
+        getSupportActionBar().hide();
+//        mToolBar.setVisibility(View.GONE);
+//        setSupportActionBar(toolbar);
         mHeadBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (verticalOffset <= -mHeadBarLayout.getHeight() / 2) {
-                   setTitle(mData.title);
+//                   setTitle(mData.title);
                 } else {
-                    setTitle("活动详情");
+//                    setTitle("活动详情");
                 }
             }
         });
+        mCollLayout.setTitle(mData.title);
+        mCollLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
+        mCollLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
         if(mData != null){
-            mTitle.setText(mData.title);
-            mAddress.setText(mData.address);
+//            mTitle.setText(mData.title);
+//            mAddress.setText(mData.address);
             iv.setImageURI(Uri.parse(mData.image_hlarge));
             mContent.setText(Html.fromHtml(mData.content));
         }
