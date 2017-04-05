@@ -117,7 +117,7 @@ public abstract class CompatFragment extends Fragment implements View.OnClickLis
             setContentViewLayoutParams(lp, overlay, isShowTitleBar());
         }
         
-        overlay = overlay;
+        this.overlay = overlay;
     }
     
     public boolean isShowTitleBar() {
@@ -125,8 +125,8 @@ public abstract class CompatFragment extends Fragment implements View.OnClickLis
     }
     
     public void setShowTitleBar(boolean showTitleBar) {
-        if(showTitleBar != showTitleBar) {
-            showTitleBar = showTitleBar;
+        if(this.showTitleBar != showTitleBar) {
+            this.showTitleBar = showTitleBar;
             if(mTitleBar != null) {
                 mTitleBar.setVisibility(showTitleBar? View.VISIBLE:View.GONE);
             }

@@ -43,10 +43,15 @@ public class BookFragment extends BaseFragment {
     }
     
     @Override
+    protected void initInitData() {
+        super.initInitData();
+        setShowTitleBar(false);
+    }
+    
+    @Override
     protected void initContentView(View view) {
         super.initContentView(view);
         ButterKnife.bind(this,view);
-        
         mHeadBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
