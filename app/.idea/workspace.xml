@@ -11,8 +11,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7abc59b1-ac30-48e5-ab48-3700080cd4f4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/harry/mdapp/ui/event/EventDetailActivity.java" afterPath="$PROJECT_DIR$/src/main/java/com/harry/mdapp/ui/event/EventDetailActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/harry/mdapp/ui/event/EventFragment.java" afterPath="$PROJECT_DIR$/src/main/java/com/harry/mdapp/ui/event/EventFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../retrofit/retrofit.iml" afterPath="$PROJECT_DIR$/../retrofit/retrofit.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../retrofit/src/main/java/com/harry/rv/model/EventResponse.java" afterPath="$PROJECT_DIR$/../retrofit/src/main/java/com/harry/rv/model/EventResponse.java" />
@@ -106,21 +104,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EventFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EventFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/harry/mdapp/ui/event/EventFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="198" column="71" selection-start-line="198" selection-start-column="59" selection-end-line="198" selection-end-column="71" />
+            <state relative-caret-position="212">
+              <caret line="63" column="13" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EventResponse.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="EventResponse.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../retrofit/src/main/java/com/harry/rv/model/EventResponse.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="25" column="28" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="28" />
+            <state relative-caret-position="226">
+              <caret line="40" column="33" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -4018,18 +4016,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../retrofit/src/main/java/com/harry/rv/model/EventResponse.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/harry/mdapp/ui/event/EventFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="25" column="28" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="28" />
+        <state relative-caret-position="212">
+          <caret line="63" column="13" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/harry/mdapp/ui/event/EventFragment.java">
+    <entry file="file://$PROJECT_DIR$/../retrofit/src/main/java/com/harry/rv/model/EventResponse.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="198" column="71" selection-start-line="198" selection-start-column="59" selection-end-line="198" selection-end-column="71" />
+        <state relative-caret-position="226">
+          <caret line="40" column="33" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
           <folding />
         </state>
       </provider>

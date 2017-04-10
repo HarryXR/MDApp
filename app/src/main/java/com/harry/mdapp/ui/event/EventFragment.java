@@ -53,7 +53,7 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
     
     MyHandler handler = new MyHandler();
     
-    class MyHandler extends Handler {
+    private class MyHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);

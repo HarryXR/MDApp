@@ -44,7 +44,7 @@ public class EventResponse implements Serializable,Comparable<EventResponse>{
     @Override
     public int compareTo(@NonNull EventResponse o) {
         if(o != null){
-            getInitial().compareTo(o.getInitial());
+            return getInitial().compareTo(o.getInitial());
         }
         return 0;
     }
