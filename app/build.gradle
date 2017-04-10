@@ -42,5 +42,6 @@ dependencies {
         exclude group: 'com.android.support'//, module: 'support-v4'
     }
     compile project(":retrofit")
+    compile 'com.github.cooltechworks:ScratchView:v1.1'
     testCompile 'junit:junit:4.12'
 }

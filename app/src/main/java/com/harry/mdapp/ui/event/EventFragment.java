@@ -117,6 +117,12 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
     protected void initData() {
         super.initData();
         load(false);
+        mTs.getCurrentView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ScratchActivity.go(getActivity());
+            }
+        });
     }
     
     @Override
@@ -197,8 +203,10 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
         @Override
         public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
             TextView textView = (TextView) holder.itemView.findViewById(android.R.id.text1);
-            String showValue = String.valueOf(getItem(position).subcategory_name==null?getItem(position).category:getItem
-                (position).subcategory_name);
+            String showValue = String.valueOf(getItem(position).subcategory_name == null ? getItem(position).category
+                                                                                         : getItem(
+                                                                                             position)
+                                                  .subcategory_name);
             textView.setText(showValue);
         }
     }

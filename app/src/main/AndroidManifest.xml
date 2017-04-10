@@ -31,7 +31,9 @@
         <activity
             android:name=".ui.event.EventDetailActivity"
             android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".ui.event.ScratchActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".common.H5Activity"
             android:configChanges="keyboardHidden|orientation"

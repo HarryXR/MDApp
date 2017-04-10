@@ -8,7 +8,6 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,20 +32,13 @@ public abstract class BaseActivity extends CompatActivity implements View.OnClic
        
     }
 
-    protected void initIntent(Bundle bundle) {
-
-    }
-
     @Override
     protected void initWindowFeature() {
         super.initWindowFeature();
     }
 
-    protected void initContentView(View view) {
-
-    }
-
     protected void initHeaderView() {
+        super.initHeaderView();
         int padding = AppUtils.dp2px(this, 8);
         mToolBar.setPadding(padding, 0, padding, 0);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -55,14 +47,6 @@ public abstract class BaseActivity extends CompatActivity implements View.OnClic
             mToolBar.setTitleTextColor(getResources().getColor(R.color.white));
 
         }
-
-    }
-
-    protected void initData() {
-
-    }
-
-    protected void initBottomView() {
 
     }
     
@@ -102,6 +86,7 @@ public abstract class BaseActivity extends CompatActivity implements View.OnClic
 
     @Override
     public void setTitle(CharSequence title) {
+        super.setTitle(title);
         mToolBar.setTitle(title);
     }
 
