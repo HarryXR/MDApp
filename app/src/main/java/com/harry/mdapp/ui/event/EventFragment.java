@@ -184,7 +184,7 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
         // 实现以下方法,支持浮动头部
         @Override
         public long getHeaderId(int position) {
-            return Math.abs(getItem(position).category.hashCode());
+            return Math.abs(getItem(position).category.charAt(0));
         }
         
         @Override
@@ -197,7 +197,8 @@ public class EventFragment extends BaseListFragment<EventResponse> implements Af
         @Override
         public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
             TextView textView = (TextView) holder.itemView.findViewById(android.R.id.text1);
-            String showValue = String.valueOf(getItem(position).subcategory_name==null?"":getItem(position).subcategory_name);
+            String showValue = String.valueOf(getItem(position).subcategory_name==null?getItem(position).category:getItem
+                (position).subcategory_name);
             textView.setText(showValue);
         }
     }

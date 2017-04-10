@@ -58,8 +58,6 @@ public class EventDetailActivity extends BaseActivity {
         super.initContentView(view);
         ButterKnife.bind(this);
         getSupportActionBar().hide();
-//        mToolBar.setVisibility(View.GONE);
-//        setSupportActionBar(toolbar);
         mHeadBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
